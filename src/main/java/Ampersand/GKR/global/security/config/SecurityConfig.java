@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
-
+                .antMatchers("/auth/**").permitAll()
 
                 .anyRequest().denyAll();
 
