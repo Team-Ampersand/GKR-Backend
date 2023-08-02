@@ -15,7 +15,8 @@ public enum ErrorCode {
     TOKEN_NOT_VALID("토큰이 유효 하지 않습니다.", 401),
 
     //USER
-    ROLE_NOT_EXIST("역할이 존재하지 않습니다.", 404);
+    ROLE_NOT_EXIST("역할이 존재하지 않습니다.", 404),
+    USER_NOT_FOUND("사용자를 찾을 수 없습니다", 404);
 
     private final String message;
 
