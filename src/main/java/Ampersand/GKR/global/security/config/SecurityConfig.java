@@ -35,6 +35,7 @@ public class SecurityConfig {
 
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("ROLE_STUDENT")
 
                 .anyRequest().denyAll();
 
