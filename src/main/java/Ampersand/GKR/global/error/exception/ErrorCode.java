@@ -16,7 +16,11 @@ public enum ErrorCode {
 
     //USER
     ROLE_NOT_EXIST("역할이 존재하지 않습니다.", 404),
-    USER_NOT_FOUND("사용자를 찾을 수 없습니다", 404);
+    USER_NOT_FOUND("사용자를 찾을 수 없습니다", 404),
+
+    //FILE
+    FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다.", 500),
+    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400);
 
     private final String message;
 
