@@ -1,9 +1,11 @@
 package Ampersand.GKR.domain.equipment.presentation;
 
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
+import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentResponse;
 import Ampersand.GKR.domain.equipment.service.CreateEquipmentService;
 import Ampersand.GKR.domain.equipment.service.DeleteEquipmentService;
+import Ampersand.GKR.domain.equipment.service.DetailEquipmentService;
 import Ampersand.GKR.domain.equipment.service.ListEquipmentService;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class AdminEquipmentController {
 
     private final DeleteEquipmentService deleteEquipmentService;
 
+    private final DetailEquipmentService detailEquipmentService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         createEquipmentService.execute(createEquipmentRequest, file);
@@ -32,6 +36,12 @@ public class AdminEquipmentController {
     public ResponseEntity<ListEquipmentResponse> list() {
         var list = listEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetailEquipmentResponse> detail(@PathVariable Long id) {
+        DetailEquipmentResponse detailEquipmentResponse = detailEquipmentService.execute(id);
+        return new ResponseEntity<>(detailEquipmentResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
