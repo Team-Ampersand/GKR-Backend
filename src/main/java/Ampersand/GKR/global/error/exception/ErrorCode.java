@@ -20,7 +20,10 @@ public enum ErrorCode {
 
     //FILE
     FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다.", 500),
-    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400);
+    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400),
+
+    //EQUIPMENT
+    EQUIPMENT_NOT_FOUND("기자재를 찾을 수 없습니다.", 404);
 
     private final String message;
 
