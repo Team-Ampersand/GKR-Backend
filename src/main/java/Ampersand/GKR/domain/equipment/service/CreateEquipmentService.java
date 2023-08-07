@@ -32,6 +32,7 @@ public class CreateEquipmentService {
                 .description(equipmentRequest.getDescription())
                 .imageUrl(fileUrl)
                 .rentStatus(RentStatus.NOT_RENT)
+                .equipmentType(equipmentRequest.getEquipmentType())
                 .build();
 
         equipmentRepository.save(equipment);

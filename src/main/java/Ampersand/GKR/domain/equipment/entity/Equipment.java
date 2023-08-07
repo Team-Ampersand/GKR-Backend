@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.equipment.entity;
 
+import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
 import lombok.*;
@@ -32,9 +33,13 @@ public class Equipment {
     @Enumerated(EnumType.STRING)
     private RentStatus rentStatus;
 
+    @Enumerated(EnumType.STRING)
+    private EquipmentType equipmentType;
+
     public void update(EditEquipmentRequest equipmentRequest, String fileUrl) {
         this.name = equipmentRequest.getName();
         this.description = equipmentRequest.getDescription();
         this.imageUrl = fileUrl;
+        this.equipmentType = equipmentRequest.getEquipmentType();
     }
 }
