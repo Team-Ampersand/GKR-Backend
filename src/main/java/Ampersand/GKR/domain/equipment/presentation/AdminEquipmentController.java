@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.equipment.presentation;
 
+import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
@@ -20,11 +21,14 @@ public class AdminEquipmentController {
 
     private final ListEquipmentService listEquipmentService;
 
+    private final ListNotRentEquipmentService listNotRentEquipmentService;
+
     private final DeleteEquipmentService deleteEquipmentService;
 
     private final DetailEquipmentService detailEquipmentService;
 
     private final EditEquipmentService editEquipmentService;
+
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
@@ -42,6 +46,12 @@ public class AdminEquipmentController {
     public ResponseEntity<DetailEquipmentResponse> detail(@PathVariable Long id) {
         DetailEquipmentResponse detailEquipmentResponse = detailEquipmentService.execute(id);
         return new ResponseEntity<>(detailEquipmentResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/rent")
+    public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam RentStatus rentStatus) {
+        var list = listNotRentEquipmentService.execute(rentStatus);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
