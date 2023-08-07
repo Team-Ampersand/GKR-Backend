@@ -14,7 +14,7 @@ import static Ampersand.GKR.domain.equipment.presentation.dto.response.Equipment
 
 @ReadOnlyService
 @RequiredArgsConstructor
-public class ListNotRentEquipmentService {
+public class ListRentStatusEquipmentService {
 
     private final EquipmentRepository equipmentRepository;
 
