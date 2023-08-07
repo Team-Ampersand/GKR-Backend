@@ -1,11 +1,13 @@
 package Ampersand.GKR.domain.equipment.presentation;
 
+import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentResponse;
 import Ampersand.GKR.domain.equipment.service.DetailEquipmentService;
+import Ampersand.GKR.domain.equipment.service.ListEqTypeEquipmentService;
 import Ampersand.GKR.domain.equipment.service.ListEquipmentService;
-import Ampersand.GKR.domain.equipment.service.ListNotRentEquipmentService;
+import Ampersand.GKR.domain.equipment.service.ListRentStatusEquipmentService;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,9 @@ public class UserEquipmentController {
 
     private final ListEquipmentService listEquipmentService;
 
-    private final ListNotRentEquipmentService listNotRentEquipmentService;
+    private final ListRentStatusEquipmentService listRentStatusEquipmentService;
+
+    private final ListEqTypeEquipmentService listEqTypeEquipmentService;
 
     private final DetailEquipmentService detailEquipmentService;
 
@@ -38,7 +42,13 @@ public class UserEquipmentController {
 
     @GetMapping("/rent")
     public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam RentStatus rentStatus) {
-        var list = listNotRentEquipmentService.execute(rentStatus);
+        var list = listRentStatusEquipmentService.execute(rentStatus);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/type")
+    public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam EquipmentType equipmentType) {
+        var list = listEqTypeEquipmentService.execute(equipmentType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
