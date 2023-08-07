@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.equipment.presentation;
 
+import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
@@ -21,7 +22,9 @@ public class AdminEquipmentController {
 
     private final ListEquipmentService listEquipmentService;
 
-    private final ListNotRentEquipmentService listNotRentEquipmentService;
+    private final ListRentStatusEquipmentService listRentStatusEquipmentService;
+
+    private final ListEqTypeEquipmentService listEqTypeEquipmentService;
 
     private final DeleteEquipmentService deleteEquipmentService;
 
@@ -50,7 +53,13 @@ public class AdminEquipmentController {
 
     @GetMapping("/rent")
     public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam RentStatus rentStatus) {
-        var list = listNotRentEquipmentService.execute(rentStatus);
+        var list = listRentStatusEquipmentService.execute(rentStatus);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/type")
+    public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam EquipmentType equipmentType) {
+        var list = listEqTypeEquipmentService.execute(equipmentType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
