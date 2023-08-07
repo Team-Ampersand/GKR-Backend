@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.equipment.presentation.dto.response;
 
+import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +20,6 @@ public class DetailEquipmentResponse {
     private String description;
 
     private RentStatus rentStatus;
+
+    private EquipmentType equipmentType;
 }

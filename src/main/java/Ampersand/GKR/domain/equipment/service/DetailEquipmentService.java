@@ -22,6 +22,7 @@ public class DetailEquipmentService {
                 .imageUrl(equipment.getImageUrl())
                 .description(equipment.getDescription())
                 .rentStatus(equipment.getRentStatus())
+                .equipmentType(equipment.getEquipmentType())
                 .build();
 
         return detailEquipmentResponse;
