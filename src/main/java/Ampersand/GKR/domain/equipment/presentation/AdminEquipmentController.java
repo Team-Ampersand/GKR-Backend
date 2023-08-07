@@ -4,6 +4,7 @@ import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
+import Ampersand.GKR.domain.equipment.presentation.dto.request.SearchEquipmentNameRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentResponse;
 import Ampersand.GKR.domain.equipment.service.*;
@@ -31,6 +32,8 @@ public class AdminEquipmentController {
     private final DetailEquipmentService detailEquipmentService;
 
     private final EditEquipmentService editEquipmentService;
+
+    private final ListSearchEquipmentNameService listSearchEquipmentNameService;
 
 
     @PostMapping
@@ -60,6 +63,12 @@ public class AdminEquipmentController {
     @GetMapping("/type")
     public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam EquipmentType equipmentType) {
         var list = listEqTypeEquipmentService.execute(equipmentType);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ListEquipmentResponse> searchName(@RequestParam("name") SearchEquipmentNameRequest searchEquipmentNameRequest) {
+        var list = listSearchEquipmentNameService.execute(searchEquipmentNameRequest);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
