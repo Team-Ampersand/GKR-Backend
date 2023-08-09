@@ -35,6 +35,11 @@ public class User {
     @Column(name = "student_num" , nullable = false)
     private int stuNum;
 
+    @Column(name = "profile_url")
+    private String profileUrl;
+
+    private boolean isRentalRestricted;
+
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
