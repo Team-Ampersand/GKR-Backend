@@ -34,8 +34,7 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("ROLE_STUDENT")
+                .antMatchers("/equipment/admin").hasAnyAuthority("ROLE_ADMIN")
 
                 .anyRequest().denyAll();
 
