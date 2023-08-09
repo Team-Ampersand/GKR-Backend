@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
-@RestRequestService("/admin/equipment")
-public class AdminEquipmentController {
+@RestRequestService("/equipment")
+public class EquipmentController {
 
     private final CreateEquipmentService createEquipmentService;
 
@@ -36,7 +36,7 @@ public class AdminEquipmentController {
     private final ListSearchEquipmentNameService listSearchEquipmentNameService;
 
 
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         createEquipmentService.execute(createEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -72,13 +72,13 @@ public class AdminEquipmentController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteEquipmentService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/admin")
     public ResponseEntity<Void> edit(@PathVariable Long id, @RequestPart(name = "equipment") EditEquipmentRequest editEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         editEquipmentService.execute(id, editEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.OK);
