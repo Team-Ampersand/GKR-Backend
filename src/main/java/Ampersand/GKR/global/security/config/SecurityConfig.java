@@ -5,6 +5,7 @@ import Ampersand.GKR.global.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,8 +34,19 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/equipment").permitAll()
+                .antMatchers(HttpMethod.GET, "/equipment/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/equipment/rent").permitAll()
+                .antMatchers(HttpMethod.GET, "/equipment/type").permitAll()
+                .antMatchers(HttpMethod.GET, "/equipment/search").permitAll()
                 .antMatchers("/equipment/admin").hasAnyAuthority("ROLE_ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/user").authenticated()
+                .antMatchers(HttpMethod.GET, "/user/admin/all").hasAnyAuthority("ROLE_ADMIN")
 
                 .anyRequest().denyAll();
 
