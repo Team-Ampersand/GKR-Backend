@@ -1,7 +1,7 @@
 package Ampersand.GKR.domain.equipment.service;
 
 import Ampersand.GKR.domain.equipment.entity.Equipment;
-import Ampersand.GKR.domain.equipment.enums.RentStatus;
+import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
 import Ampersand.GKR.domain.equipment.repository.EquipmentRepository;
 import Ampersand.GKR.domain.file.service.FileUploadService;
@@ -31,7 +31,7 @@ public class CreateEquipmentService {
                 .name(equipmentRequest.getName())
                 .description(equipmentRequest.getDescription())
                 .imageUrl(fileUrl)
-                .rentStatus(RentStatus.NOT_RENT)
+                .equipmentStatus(EquipmentStatus.NOT_RENT)
                 .equipmentType(equipmentRequest.getEquipmentType())
                 .build();
 
