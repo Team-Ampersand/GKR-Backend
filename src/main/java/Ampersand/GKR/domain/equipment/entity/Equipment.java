@@ -1,7 +1,7 @@
 package Ampersand.GKR.domain.equipment.entity;
 
+import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
-import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,15 +31,19 @@ public class Equipment {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private RentStatus rentStatus;
+    private EquipmentStatus equipmentStatus;
 
     @Enumerated(EnumType.STRING)
     private EquipmentType equipmentType;
 
-    public void update(EditEquipmentRequest equipmentRequest, String fileUrl) {
+    public void edit(EditEquipmentRequest equipmentRequest, String fileUrl) {
         this.name = equipmentRequest.getName();
         this.description = equipmentRequest.getDescription();
         this.imageUrl = fileUrl;
         this.equipmentType = equipmentRequest.getEquipmentType();
+    }
+
+    public void setEquipmentStatus(EquipmentStatus equipmentStatus) {
+        this.equipmentStatus = equipmentStatus;
     }
 }

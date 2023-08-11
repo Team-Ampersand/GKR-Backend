@@ -28,6 +28,6 @@ public class EditEquipmentService {
 
         String fileUrl = fileUploadService.execute(file).getImageUrl();
 
-        equipment.update(equipmentRequest, fileUrl);
+        equipment.edit(equipmentRequest, fileUrl);
     }
 }

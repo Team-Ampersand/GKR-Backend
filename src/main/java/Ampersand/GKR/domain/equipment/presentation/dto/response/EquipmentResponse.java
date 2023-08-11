@@ -1,8 +1,8 @@
 package Ampersand.GKR.domain.equipment.presentation.dto.response;
 
 import Ampersand.GKR.domain.equipment.entity.Equipment;
+import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
-import Ampersand.GKR.domain.equipment.enums.RentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class EquipmentResponse {
 
     private String description;
 
-    private RentStatus rentStatus;
+    private EquipmentStatus equipmentStatus;
 
     private EquipmentType equipmentType;
 
@@ -31,7 +31,7 @@ public class EquipmentResponse {
                 .name(equipment.getName())
                 .imageUrl(equipment.getImageUrl())
                 .description(equipment.getDescription())
-                .rentStatus(equipment.getRentStatus())
+                .equipmentStatus(equipment.getEquipmentStatus())
                 .equipmentType(equipment.getEquipmentType())
                 .build();
     }
