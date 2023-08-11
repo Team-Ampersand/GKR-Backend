@@ -23,7 +23,8 @@ public enum ErrorCode {
     INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400),
 
     //EQUIPMENT
-    EQUIPMENT_NOT_FOUND("기자재를 찾을 수 없습니다.", 404);
+    EQUIPMENT_NOT_FOUND("기자재를 찾을 수 없습니다.", 404),
+    ALREADY_ORDER_EQUIPMENT("이미 대여된 기자재 입니다.", 409);
 
     private final String message;
 
