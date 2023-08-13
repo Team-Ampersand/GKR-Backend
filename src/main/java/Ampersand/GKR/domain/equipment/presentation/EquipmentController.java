@@ -23,7 +23,7 @@ public class EquipmentController {
 
     private final ListEquipmentService listEquipmentService;
 
-    private final ListRentStatusEquipmentService listRentStatusEquipmentService;
+    private final ListEqStatusEquipmentService listEqStatusEquipmentService;
 
     private final ListEqTypeEquipmentService listEqTypeEquipmentService;
 
@@ -36,14 +36,14 @@ public class EquipmentController {
     private final ListSearchEquipmentNameService listSearchEquipmentNameService;
 
 
-    @PostMapping("/admin")
+    @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         createEquipmentService.execute(createEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<ListEquipmentResponse> list() {
+    public ResponseEntity<ListEquipmentResponse> allList() {
         var list = listEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -54,31 +54,31 @@ public class EquipmentController {
         return new ResponseEntity<>(detailEquipmentResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/rent")
-    public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam EquipmentStatus equipmentStatus) {
-        var list = listRentStatusEquipmentService.execute(equipmentStatus);
+    @GetMapping("/state")
+    public ResponseEntity<ListEquipmentResponse> eqStatusList(@RequestParam EquipmentStatus equipmentStatus) {
+        var list = listEqStatusEquipmentService.execute(equipmentStatus);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/type")
-    public ResponseEntity<ListEquipmentResponse> rentStatusList(@RequestParam EquipmentType equipmentType) {
+    public ResponseEntity<ListEquipmentResponse> eqTypeList(@RequestParam EquipmentType equipmentType) {
         var list = listEqTypeEquipmentService.execute(equipmentType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<ListEquipmentResponse> searchName(@RequestParam("name") SearchEquipmentNameRequest searchEquipmentNameRequest) {
+    public ResponseEntity<ListEquipmentResponse> search(@RequestParam("name") SearchEquipmentNameRequest searchEquipmentNameRequest) {
         var list = listSearchEquipmentNameService.execute(searchEquipmentNameRequest);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteEquipmentService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/admin")
+    @PatchMapping("/edit/{id}")
     public ResponseEntity<Void> edit(@PathVariable Long id, @RequestPart(name = "equipment") EditEquipmentRequest editEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         editEquipmentService.execute(id, editEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.OK);
