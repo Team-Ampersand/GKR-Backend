@@ -53,6 +53,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/order/rental/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/order/state").authenticated()
 
+                .antMatchers(HttpMethod.GET, "/order/noreturn").hasAnyAuthority("ROLE_ADMIN")
+
                 .anyRequest().denyAll();
 
         http
