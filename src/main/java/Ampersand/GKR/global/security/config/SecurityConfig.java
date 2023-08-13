@@ -54,6 +54,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/order/state").authenticated()
 
                 .antMatchers(HttpMethod.GET, "/order/noreturn").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/order/wait").hasAnyAuthority("ROLE_ADMIN")
 
                 .anyRequest().denyAll();
 
