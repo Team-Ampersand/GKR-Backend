@@ -24,6 +24,8 @@ public class OrderController {
 
     private final RejectOrderService rejectOrderService;
 
+    private final AcceptOrderService acceptOrderService;
+
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
     private final ListNotReturnEquipmentService listNotReturnEquipmentService;
@@ -52,6 +54,12 @@ public class OrderController {
     @PatchMapping("/reject/{id}")
     public ResponseEntity<Void> reject(@PathVariable Long id) {
         rejectOrderService.execute(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/accept/{id}")
+    public ResponseEntity<Void> accept(@PathVariable Long id) {
+        acceptOrderService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
