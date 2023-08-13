@@ -22,6 +22,8 @@ public class OrderController {
 
     private final ExtensionEquipmentService extensionEquipmentService;
 
+    private final RejectOrderService rejectOrderService;
+
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
     private final ListNotReturnEquipmentService listNotReturnEquipmentService;
@@ -44,6 +46,12 @@ public class OrderController {
     @PostMapping("/extension/{id}")
     public ResponseEntity<Void> eqExtension(@PathVariable Long id, ExtensionEquipmentRequest extensionEquipmentRequest) {
         extensionEquipmentService.execute(id, extensionEquipmentRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/reject/{id}")
+    public ResponseEntity<Void> reject(@PathVariable Long id) {
+        rejectOrderService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
