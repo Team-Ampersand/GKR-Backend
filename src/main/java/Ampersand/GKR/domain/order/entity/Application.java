@@ -1,8 +1,8 @@
 package Ampersand.GKR.domain.order.entity;
 
 import Ampersand.GKR.domain.equipment.entity.Equipment;
-import Ampersand.GKR.domain.order.enums.RentalStatus;
-import Ampersand.GKR.domain.order.enums.RentalType;
+import Ampersand.GKR.domain.order.enums.OrderStatus;
+import Ampersand.GKR.domain.order.enums.OrderType;
 import Ampersand.GKR.domain.user.entity.User;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -32,10 +32,10 @@ public class Application {
     private String userName;
 
     @Enumerated(EnumType.STRING)
-    private RentalType rentalType;
+    private OrderType orderType;
 
     @Enumerated(EnumType.STRING)
-    private RentalStatus rentalStatus;
+    private OrderStatus orderStatus;
 
     @OneToOne
     @JoinColumn(name = "equipment_id")
@@ -44,4 +44,9 @@ public class Application {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void setOrderInfo(OrderStatus orderStatus, OrderType orderType) {
+        this.orderStatus = orderStatus;
+        this.orderType = orderType;
+    }
 }
