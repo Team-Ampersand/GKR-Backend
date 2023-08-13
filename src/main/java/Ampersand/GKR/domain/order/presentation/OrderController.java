@@ -2,7 +2,9 @@ package Ampersand.GKR.domain.order.presentation;
 
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
+import Ampersand.GKR.domain.order.presentation.dto.response.ListApplicationResponse;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListOrderEquipmentResponse;
+import Ampersand.GKR.domain.order.service.ListNotReturnEquipmentService;
 import Ampersand.GKR.domain.order.service.ListOrderStatusEquipmentService;
 import Ampersand.GKR.domain.order.service.RentalEquipmentService;
 import Ampersand.GKR.global.annotation.RestRequestService;
@@ -19,6 +21,8 @@ public class OrderController {
 
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
+    private final ListNotReturnEquipmentService listNotReturnEquipmentService;
+
     @PostMapping("/rental/{id}")
     public ResponseEntity<Void> rental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
         rentalEquipmentService.execute(id, rentalEquipmentRequest);
@@ -28,6 +32,12 @@ public class OrderController {
     @GetMapping("/state")
     public ResponseEntity<ListOrderEquipmentResponse> orderStateList(@RequestParam OrderStatus orderStatus) {
         var list = listOrderStatusEquipmentService.execute(orderStatus);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/noreturn")
+    public ResponseEntity<ListApplicationResponse> notReturnList() {
+        var list = listNotReturnEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
