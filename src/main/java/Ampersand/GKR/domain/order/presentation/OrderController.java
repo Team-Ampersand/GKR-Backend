@@ -1,6 +1,7 @@
 package Ampersand.GKR.domain.order.presentation;
 
 import Ampersand.GKR.domain.order.enums.OrderStatus;
+import Ampersand.GKR.domain.order.presentation.dto.request.ExtensionEquipmentRequest;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListApplicationResponse;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListOrderEquipmentResponse;
@@ -19,11 +20,14 @@ public class OrderController {
 
     private final ReturnEquipmentService returnEquipmentService;
 
+    private final ExtensionEquipmentService extensionEquipmentService;
+
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
     private final ListNotReturnEquipmentService listNotReturnEquipmentService;
 
     private final ListWaitingOrderEquipmentService listWaitingOrderEquipmentService;
+
 
     @PostMapping("/rental/{id}")
     public ResponseEntity<Void> eqRental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
@@ -34,6 +38,12 @@ public class OrderController {
     @PostMapping("/return/{id}")
     public ResponseEntity<Void> eqReturn(@PathVariable Long id) {
         returnEquipmentService.execute(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/extension/{id}")
+    public ResponseEntity<Void> eqExtension(@PathVariable Long id, ExtensionEquipmentRequest extensionEquipmentRequest) {
+        extensionEquipmentService.execute(id, extensionEquipmentRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
