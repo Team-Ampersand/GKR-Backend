@@ -1,6 +1,5 @@
 package Ampersand.GKR.domain.order.presentation.dto.response;
 
-import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.order.entity.Application;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.enums.OrderType;
