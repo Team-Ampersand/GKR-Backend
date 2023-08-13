@@ -49,4 +49,9 @@ public class Application {
         this.orderStatus = orderStatus;
         this.orderType = orderType;
     }
+
+    public void extensionDate(String rentalDate, String reason) {
+        this.rentalDate = rentalDate;
+        this.reason = reason;
+    }
 }
