@@ -4,10 +4,7 @@ import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListApplicationResponse;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListOrderEquipmentResponse;
-import Ampersand.GKR.domain.order.service.ListNotReturnEquipmentService;
-import Ampersand.GKR.domain.order.service.ListOrderStatusEquipmentService;
-import Ampersand.GKR.domain.order.service.ListWaitingOrderEquipmentService;
-import Ampersand.GKR.domain.order.service.RentalEquipmentService;
+import Ampersand.GKR.domain.order.service.*;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +17,8 @@ public class OrderController {
 
     private final RentalEquipmentService rentalEquipmentService;
 
+    private final ReturnEquipmentService returnEquipmentService;
+
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
     private final ListNotReturnEquipmentService listNotReturnEquipmentService;
@@ -27,9 +26,15 @@ public class OrderController {
     private final ListWaitingOrderEquipmentService listWaitingOrderEquipmentService;
 
     @PostMapping("/rental/{id}")
-    public ResponseEntity<Void> rental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
+    public ResponseEntity<Void> eqRental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
         rentalEquipmentService.execute(id, rentalEquipmentRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/return/{id}")
+    public ResponseEntity<Void> eqReturn(@PathVariable Long id) {
+        returnEquipmentService.execute(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/state")
