@@ -52,10 +52,12 @@ public class SecurityConfig {
 
                 .antMatchers(HttpMethod.POST, "/order/rental/{id}").authenticated()
                 .antMatchers(HttpMethod.POST, "/order/return/{id}").authenticated()
+                .antMatchers(HttpMethod.POST, "/order/extension/{id}").authenticated()
                 .antMatchers(HttpMethod.GET, "/order/state").authenticated()
 
                 .antMatchers(HttpMethod.GET, "/order/noreturn").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET, "/order/wait").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/order/reject/{id}").hasAnyAuthority("ROLE_ADMIN")
 
                 .anyRequest().denyAll();
 

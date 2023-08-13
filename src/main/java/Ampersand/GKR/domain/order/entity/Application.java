@@ -50,6 +50,10 @@ public class Application {
         this.orderType = orderType;
     }
 
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public void extensionDate(String rentalDate, String reason) {
         this.rentalDate = rentalDate;
         this.reason = reason;
