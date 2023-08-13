@@ -6,6 +6,7 @@ import Ampersand.GKR.domain.order.presentation.dto.response.ListApplicationRespo
 import Ampersand.GKR.domain.order.presentation.dto.response.ListOrderEquipmentResponse;
 import Ampersand.GKR.domain.order.service.ListNotReturnEquipmentService;
 import Ampersand.GKR.domain.order.service.ListOrderStatusEquipmentService;
+import Ampersand.GKR.domain.order.service.ListWaitingOrderEquipmentService;
 import Ampersand.GKR.domain.order.service.RentalEquipmentService;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ public class OrderController {
 
     private final ListNotReturnEquipmentService listNotReturnEquipmentService;
 
+    private final ListWaitingOrderEquipmentService listWaitingOrderEquipmentService;
+
     @PostMapping("/rental/{id}")
     public ResponseEntity<Void> rental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
         rentalEquipmentService.execute(id, rentalEquipmentRequest);
@@ -38,6 +41,12 @@ public class OrderController {
     @GetMapping("/noreturn")
     public ResponseEntity<ListApplicationResponse> notReturnList() {
         var list = listNotReturnEquipmentService.execute();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/wait")
+    public ResponseEntity<ListApplicationResponse> waitingList() {
+        var list = listWaitingOrderEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
