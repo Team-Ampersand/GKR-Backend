@@ -24,7 +24,7 @@ public class UserController {
         return new ResponseEntity<>(userInfoResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/admin/all")
+    @GetMapping("/all")
     public ResponseEntity<ListAllUserInfoResponse> getAllUserInfo() {
         ListAllUserInfoResponse listAllUserInfoResponse = listAllUserInfoService.execute();
         return new ResponseEntity<>(listAllUserInfoResponse, HttpStatus.OK);

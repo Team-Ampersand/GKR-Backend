@@ -2,10 +2,10 @@ package Ampersand.GKR.domain.order.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public enum RentalStatus {
+public enum OrderStatus {
 
     WAITING, ACCEPT, REJECT;
 
     @JsonCreator
-    public static RentalStatus from(String s) { return RentalStatus.valueOf(s.toUpperCase()); }
+    public static OrderStatus from(String s) { return OrderStatus.valueOf(s.toUpperCase()); }
 }
