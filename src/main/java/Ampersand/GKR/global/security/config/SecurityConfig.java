@@ -40,15 +40,18 @@ public class SecurityConfig {
 
                 .antMatchers(HttpMethod.GET, "/equipment").permitAll()
                 .antMatchers(HttpMethod.GET, "/equipment/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/equipment/rent").permitAll()
+                .antMatchers(HttpMethod.GET, "/equipment/state").permitAll()
                 .antMatchers(HttpMethod.GET, "/equipment/type").permitAll()
                 .antMatchers(HttpMethod.GET, "/equipment/search").permitAll()
-                .antMatchers("/equipment/admin").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/equipment/create").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/equipment/edit/{id}").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/equipment/delete{id}").hasAnyAuthority("ROLE_ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/user").authenticated()
-                .antMatchers(HttpMethod.GET, "/user/admin/all").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/user/all").hasAnyAuthority("ROLE_ADMIN")
 
-                .antMatchers(HttpMethod.POST, "/application/rental/{id}").authenticated()
+                .antMatchers(HttpMethod.POST, "/order/rental/{id}").authenticated()
+                .antMatchers(HttpMethod.GET, "/order/state").authenticated()
 
                 .anyRequest().denyAll();
 
