@@ -34,7 +34,7 @@ public class ExtensionEquipmentService {
             throw new NotMyRentedEquipmentException();
         }
 
-        application.extensionDate(extensionEquipmentRequest.getRentalDate(), extensionEquipmentRequest.getReason());
+        application.extensionReason(extensionEquipmentRequest.getReason());
 
         application.setOrderInfo(OrderStatus.WAITING, OrderType.EXTENSION);
     }

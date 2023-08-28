@@ -31,10 +31,13 @@ public class AcceptOrderService {
         switch (application.getOrderType()) {
             case RENTAL :
                 application.getEquipment().setEquipmentStatus(EquipmentStatus.RENTING);
+                application.setRentalDates();
                 return;
             case RETURN:
                 application.getEquipment().setEquipmentStatus(EquipmentStatus.NOT_RENT);
                 applicationRepository.delete(application);
+            case EXTENSION:
+                application.extensionDate();
         }
     }
 }

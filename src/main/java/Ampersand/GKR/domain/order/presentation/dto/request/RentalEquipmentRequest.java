@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RentalEquipmentRequest {
 
-    private String rentalDate;
-
     private String reason;
 }

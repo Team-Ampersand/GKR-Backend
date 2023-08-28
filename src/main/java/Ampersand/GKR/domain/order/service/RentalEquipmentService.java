@@ -35,7 +35,6 @@ public class RentalEquipmentService {
         }
 
         Application application = Application.builder()
-                .rentalDate(rentalEquipmentRequest.getRentalDate())
                 .reason(rentalEquipmentRequest.getReason())
                 .orderStatus(OrderStatus.WAITING)
                 .orderType(OrderType.RENTAL)

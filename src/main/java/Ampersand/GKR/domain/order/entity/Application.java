@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,8 +23,11 @@ public class Application {
     @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "rental_date")
-    private String rentalDate;
+    @Column(name = "rental_start_date")
+    private LocalDateTime rentalStartDate;
+
+    @Column(name = "rental_end_date")
+    private LocalDateTime rentalEndDate;
 
     @Column(name = "reason")
     private String reason;
@@ -54,8 +58,16 @@ public class Application {
         this.orderStatus = orderStatus;
     }
 
-    public void extensionDate(String rentalDate, String reason) {
-        this.rentalDate = rentalDate;
+    public void setRentalDates() {
+        this.rentalStartDate = LocalDateTime.now();
+        this.rentalEndDate = rentalStartDate.plusMonths(1);
+    }
+
+    public void extensionDate() {
+        this.rentalEndDate = rentalEndDate.plusMonths(1);
+    }
+
+    public void extensionReason(String reason) {
         this.reason = reason;
     }
 }
