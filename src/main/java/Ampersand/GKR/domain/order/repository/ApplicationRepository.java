@@ -5,6 +5,7 @@ import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
@@ -12,4 +13,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     List<Application> findByUserAndOrderStatus(User user, OrderStatus orderStatus);
 
     List<Application> findByOrderStatus(OrderStatus orderStatus);
+
+    List<Application> findByRentalEndDateBefore(LocalDateTime currentDate);
 }

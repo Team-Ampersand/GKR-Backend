@@ -28,9 +28,11 @@ public class OrderController {
 
     private final ListOrderStatusEquipmentService listOrderStatusEquipmentService;
 
-    private final ListNotReturnEquipmentService listNotReturnEquipmentService;
+    private final ListCurrentRentalEquipmentService listCurrentRentalEquipmentService;
 
     private final ListWaitingOrderEquipmentService listWaitingOrderEquipmentService;
+
+    private final ListNotReturnUserEquipmentService listNotReturnUserEquipmentService;
 
 
     @PostMapping("/rental/{id}")
@@ -69,15 +71,21 @@ public class OrderController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/noreturn")
+    @GetMapping("/now")
     public ResponseEntity<ListApplicationResponse> notReturnList() {
-        var list = listNotReturnEquipmentService.execute();
+        var list = listCurrentRentalEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/wait")
     public ResponseEntity<ListApplicationResponse> waitingList() {
         var list = listWaitingOrderEquipmentService.execute();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/noreturn")
+    public ResponseEntity<ListApplicationResponse> noReturnList() {
+        var list = listNotReturnUserEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
