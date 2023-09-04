@@ -31,4 +31,9 @@ public class Violation {
 
     @Column(name = "violation_end_date")
     private LocalDateTime violationEndDate;
+
+    public void setViolationDates() {
+        this.violationStartDate = LocalDateTime.now();
+        this.violationEndDate = violationStartDate.plusMonths(1);
+    }
 }
