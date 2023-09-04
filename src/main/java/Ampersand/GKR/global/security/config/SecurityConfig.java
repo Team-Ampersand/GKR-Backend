@@ -61,6 +61,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH, "/order/reject/{id}").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/order/accept/{id}").hasAnyAuthority("ROLE_ADMIN")
 
+                .antMatchers(HttpMethod.POST, "/violation").hasAuthority("ROLE_ADMIN")
+
                 .anyRequest().denyAll();
 
         http
