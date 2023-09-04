@@ -43,5 +43,9 @@ public class User {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void setRentalRestricted(Boolean restricted) {
+        this.isRentalRestricted = restricted;
+    }
 }
 

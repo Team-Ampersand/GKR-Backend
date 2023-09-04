@@ -9,6 +9,7 @@ import Ampersand.GKR.domain.order.exception.EquipmentAlreadyRentalException;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
 import Ampersand.GKR.domain.order.repository.ApplicationRepository;
 import Ampersand.GKR.domain.user.entity.User;
+import Ampersand.GKR.domain.violation.util.ViolationStatusCheckUtil;
 import Ampersand.GKR.global.annotation.RollbackService;
 import Ampersand.GKR.global.util.EquipmentUtil;
 import Ampersand.GKR.global.util.UserUtil;
@@ -24,9 +25,13 @@ public class RentalEquipmentService {
 
     private final UserUtil userUtil;
 
+    private final ViolationStatusCheckUtil violationStatusCheckUtil;
+
     public void execute(Long id, RentalEquipmentRequest rentalEquipmentRequest) {
 
         User user = userUtil.currentUser();
+
+        violationStatusCheckUtil.violationCheck(user);
 
         Equipment equipment = equipmentUtil.findEquipmentById(id);
 
