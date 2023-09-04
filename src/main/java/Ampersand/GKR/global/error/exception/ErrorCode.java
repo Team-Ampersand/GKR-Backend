@@ -25,12 +25,15 @@ public enum ErrorCode {
     //EQUIPMENT
     EQUIPMENT_NOT_FOUND("기자재를 찾을 수 없습니다.", 404),
 
-    //ORDER,
+    //ORDER
     ALREADY_ORDER_EQUIPMENT("이미 대여된 기자재 입니다.", 409),
     ALREADY_RETURN_STATE("이미 반납 신청 상태입니다.", 409),
     APPLICATION_NOT_FOUND("신청 하신 사항을 찾을 수 없습니다.", 404),
     NOT_MY_RENTED_EQUIPMENT("내가 대여한 기자재가 아닙니다.", 403),
-    EQUIPMENT_NOT_RENTED("기자재가 대여되지 않았습니다.", 400);
+    EQUIPMENT_NOT_RENTED("기자재가 대여되지 않았습니다.", 400),
+
+    //VIOLATION
+    CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403);
 
     private final String message;
 
