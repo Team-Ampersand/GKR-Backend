@@ -33,7 +33,9 @@ public enum ErrorCode {
     EQUIPMENT_NOT_RENTED("기자재가 대여되지 않았습니다.", 400),
 
     //VIOLATION
-    CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403);
+    CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403),
+    NOT_CURRENTLY_VIOLATING("현재 제재를 당한 상태가 아닙니다.", 400),
+    ALREADY_VIOLATING("이미 제재중인 상태입니다.", 409);
 
     private final String message;
 
