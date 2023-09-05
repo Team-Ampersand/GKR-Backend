@@ -11,7 +11,7 @@ public class ViolationCheckSchedule {
 
     private final ViolationCheckService violationCheckService;
 
-    @Scheduled(cron = "0 0 0")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void violationCheck() {
         violationCheckService.execute();
     }
