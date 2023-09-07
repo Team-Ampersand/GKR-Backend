@@ -5,9 +5,9 @@ import Ampersand.GKR.global.error.exception.GkrException;
 import lombok.Getter;
 
 @Getter
-public class EquipmentAlreadyRentalException extends GkrException {
+public class CurrentlyRepairingEquipmentException extends GkrException {
 
-    public EquipmentAlreadyRentalException() {
-        super(ErrorCode.ALREADY_RENTING_EQUIPMENT);
+    public CurrentlyRepairingEquipmentException() {
+        super(ErrorCode.CURRENTLY_REPAIRING_EQUIPMENT);
     }
 }

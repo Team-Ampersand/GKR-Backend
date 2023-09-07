@@ -4,7 +4,6 @@ import Ampersand.GKR.domain.order.entity.Application;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.enums.OrderType;
 import Ampersand.GKR.domain.order.exception.EquipmentAlreadyReturnStatusException;
-import Ampersand.GKR.domain.order.exception.EquipmentNotRentedException;
 import Ampersand.GKR.domain.order.exception.NotMyRentedEquipmentException;
 import Ampersand.GKR.domain.user.entity.User;
 import Ampersand.GKR.global.annotation.RollbackService;
@@ -25,10 +24,6 @@ public class ReturnEquipmentService {
         User user = userUtil.currentUser();
 
         Application application = orderUtil.findApplicationById(id);
-
-        if (!application.getOrderStatus().equals(OrderStatus.ACCEPT)) {
-            throw new EquipmentNotRentedException();
-        }
 
         if (!application.getUser().equals(user)) {
             throw new NotMyRentedEquipmentException();

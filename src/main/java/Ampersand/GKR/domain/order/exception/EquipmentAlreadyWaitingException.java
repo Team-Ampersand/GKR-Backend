@@ -5,9 +5,9 @@ import Ampersand.GKR.global.error.exception.GkrException;
 import lombok.Getter;
 
 @Getter
-public class EquipmentNotRentedException extends GkrException {
+public class EquipmentAlreadyWaitingException extends GkrException {
 
-    public EquipmentNotRentedException() {
-        super(ErrorCode.EQUIPMENT_NOT_RENTED);
+    public EquipmentAlreadyWaitingException() {
+        super(ErrorCode.ALREADY_WAITING_EQUIPMENT);
     }
 }
