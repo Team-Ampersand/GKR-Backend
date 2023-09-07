@@ -5,7 +5,9 @@ import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.order.entity.Application;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.enums.OrderType;
+import Ampersand.GKR.domain.order.exception.CurrentlyRepairingEquipmentException;
 import Ampersand.GKR.domain.order.exception.EquipmentAlreadyRentalException;
+import Ampersand.GKR.domain.order.exception.EquipmentAlreadyWaitingException;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
 import Ampersand.GKR.domain.order.repository.ApplicationRepository;
 import Ampersand.GKR.domain.user.entity.User;
@@ -35,8 +37,13 @@ public class RentalEquipmentService {
 
         Equipment equipment = equipmentUtil.findEquipmentById(id);
 
-        if (!equipment.getEquipmentStatus().equals(EquipmentStatus.NOT_RENT)) {
-            throw new EquipmentAlreadyRentalException();
+        switch (equipment.getEquipmentStatus()) {
+            case RENTING:
+                throw new EquipmentAlreadyRentalException();
+            case WAITING:
+                throw new EquipmentAlreadyWaitingException();
+            case REPAIRING:
+                throw new CurrentlyRepairingEquipmentException();
         }
 
         Application application = Application.builder()
