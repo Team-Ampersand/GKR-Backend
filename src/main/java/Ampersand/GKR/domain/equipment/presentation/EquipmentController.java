@@ -35,6 +35,7 @@ public class EquipmentController {
 
     private final ListSearchEquipmentNameService listSearchEquipmentNameService;
 
+    private final RepairEquipmentService repairEquipmentService;
 
     @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
@@ -81,6 +82,12 @@ public class EquipmentController {
     @PatchMapping("/edit/{id}")
     public ResponseEntity<Void> edit(@PathVariable Long id, @RequestPart(name = "equipment") EditEquipmentRequest editEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
         editEquipmentService.execute(id, editEquipmentRequest, file);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> repair(@PathVariable Long id) {
+        repairEquipmentService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
