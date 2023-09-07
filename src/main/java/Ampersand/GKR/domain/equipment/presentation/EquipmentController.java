@@ -85,7 +85,7 @@ public class EquipmentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/repair/{id}")
     public ResponseEntity<Void> repair(@PathVariable Long id) {
         repairEquipmentService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
