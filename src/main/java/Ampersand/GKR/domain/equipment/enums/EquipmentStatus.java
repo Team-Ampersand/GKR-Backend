@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum EquipmentStatus {
 
-    NOT_RENT, WAITING, RENTING;
+    NOT_RENT, WAITING, RENTING, REPAIRING;
 
     @JsonCreator
     public static EquipmentStatus from(String s) { return EquipmentStatus.valueOf(s.toUpperCase()); }
