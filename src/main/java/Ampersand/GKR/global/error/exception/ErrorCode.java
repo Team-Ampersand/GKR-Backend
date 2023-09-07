@@ -26,11 +26,13 @@ public enum ErrorCode {
     EQUIPMENT_NOT_FOUND("기자재를 찾을 수 없습니다.", 404),
 
     //ORDER
-    ALREADY_ORDER_EQUIPMENT("이미 대여된 기자재 입니다.", 409),
-    ALREADY_RETURN_STATE("이미 반납 신청 상태입니다.", 409),
+    ALREADY_RENTING_EQUIPMENT("이미 대여된 기자재 입니다.", 409),
+    CURRENTLY_REPAIRING_EQUIPMENT("현재 수리중인 기자재 입니다.", 409),
+    ALREADY_WAITING_EQUIPMENT("이미 대여 신청중인 기자재 입니다.", 409),
+    ALREADY_RETURN_STATE("이미 반납 신청중인 기자재 입니다.", 409),
     APPLICATION_NOT_FOUND("신청 하신 사항을 찾을 수 없습니다.", 404),
     NOT_MY_RENTED_EQUIPMENT("내가 대여한 기자재가 아닙니다.", 403),
-    EQUIPMENT_NOT_RENTED("기자재가 대여되지 않았습니다.", 400),
+    REQUEST_IS_EXISTS("대기중인 요청이나 현재 기자재의 사용자가 존재합니다.", 409),
 
     //VIOLATION
     CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403),
