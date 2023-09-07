@@ -3,7 +3,6 @@ package Ampersand.GKR.domain.order.service;
 import Ampersand.GKR.domain.order.entity.Application;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.enums.OrderType;
-import Ampersand.GKR.domain.order.exception.EquipmentNotRentedException;
 import Ampersand.GKR.domain.order.exception.NotMyRentedEquipmentException;
 import Ampersand.GKR.domain.order.presentation.dto.request.ExtensionEquipmentRequest;
 import Ampersand.GKR.domain.user.entity.User;
@@ -30,10 +29,6 @@ public class ExtensionEquipmentService {
         violationStatusCheckUtil.violationCheck(user);
 
         Application application = orderUtil.findApplicationById(id);
-
-        if (!application.getOrderStatus().equals(OrderStatus.ACCEPT)) {
-            throw new EquipmentNotRentedException();
-        }
 
         if (!application.getUser().equals(user)) {
             throw new NotMyRentedEquipmentException();
