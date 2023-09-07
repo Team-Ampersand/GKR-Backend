@@ -8,6 +8,6 @@ import lombok.Getter;
 public class EquipmentAlreadyRentalException extends GkrException {
 
     public EquipmentAlreadyRentalException() {
-        super(ErrorCode.ALREADY_ORDER_EQUIPMENT);
+        super(ErrorCode.ALREADY_RENTING_EQUIPMENT);
     }
 }
