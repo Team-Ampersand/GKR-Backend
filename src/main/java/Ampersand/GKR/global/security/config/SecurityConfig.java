@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .antMatchers("/equipment/edit/{id}").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/equipment/delete{id}").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/equipment/repair/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/equipment/repair/completion/{id}").hasAuthority("ROLE_ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/user").authenticated()
                 .antMatchers(HttpMethod.GET, "/user/all").hasAnyAuthority("ROLE_ADMIN")
