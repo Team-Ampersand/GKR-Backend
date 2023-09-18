@@ -95,6 +95,9 @@ public class TokenProvider {
             case "ROLE_ADMIN":
                 return Role.ROLE_ADMIN;
 
+            case "ROLE_TEACHER":
+                return Role.ROLE_TEACHER;
+
             default:
                 throw new RoleNotExistException();
         }

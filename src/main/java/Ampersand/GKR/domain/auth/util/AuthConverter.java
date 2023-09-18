@@ -22,7 +22,6 @@ public class AuthConverter {
         return loginDto;
     }
 
-
     public User toEntity(GAuthUserInfo gAuthUserInfo) {
 
         User user = User.builder()
@@ -48,6 +47,18 @@ public class AuthConverter {
                 .classNum(gAuthUserInfo.getClassNum())
                 .stuNum(gAuthUserInfo.getNum())
                 .role(Role.ROLE_ADMIN)
+                .build();
+
+        return user;
+    }
+
+    public User toTeacherEntity(GAuthUserInfo gAuthUserInfo) {
+
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .email(gAuthUserInfo.getEmail())
+                .name(gAuthUserInfo.getName())
+                .role(Role.ROLE_TEACHER)
                 .build();
 
         return user;

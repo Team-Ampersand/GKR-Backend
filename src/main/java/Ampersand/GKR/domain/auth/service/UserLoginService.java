@@ -49,10 +49,10 @@ public class UserLoginService {
         ZonedDateTime refreshExp = tokenProvider.refreshExpiredTime();
 
         if(role == Role.ROLE_ADMIN) {
-
             createAdminOrRefreshToken(gAuthUserInfo, refreshToken);
+        } else if(role == Role.ROLE_TEACHER){
+            createTeacherOrRefreshToken(gAuthUserInfo, refreshToken);
         } else {
-
             createUserOrRefreshToken(gAuthUserInfo, refreshToken);
         }
 
@@ -80,16 +80,20 @@ public class UserLoginService {
                     return Role.ROLE_STUDENT;
                 case "ROLE_ADMIN":
                     return Role.ROLE_ADMIN;
+                case "ROLE_TEACHER":
+                    return Role.ROLE_TEACHER;
                 default:
                     throw new RoleNotExistException();
             }
         }
 
         if(user.getRole().equals(Role.ROLE_ADMIN)) {
-
             return Role.ROLE_ADMIN;
+        } else if (user.getRole().equals(Role.ROLE_TEACHER)) {
+            return Role.ROLE_TEACHER;
+        } else {
+            return Role.ROLE_STUDENT;
         }
-        return Role.ROLE_STUDENT;
     }
 
     private void createUserOrRefreshToken(GAuthUserInfo gAuthUserInfo, String refreshToken) {
@@ -112,6 +116,19 @@ public class UserLoginService {
         if(adminInfo == null) {
 
             authUtil.saveNewAdmin(gAuthUserInfo, refreshToken);
+        } else {
+
+            authUtil.saveNewRefreshToken(adminInfo, refreshToken);
+        }
+    }
+
+    private void createTeacherOrRefreshToken(GAuthUserInfo gAuthUserInfo, String refreshToken) {
+
+        User adminInfo = userRepository.findUserByEmail(gAuthUserInfo.getEmail());
+
+        if(adminInfo == null) {
+
+            authUtil.saveNewTeacher(gAuthUserInfo, refreshToken);
         } else {
 
             authUtil.saveNewRefreshToken(adminInfo, refreshToken);
