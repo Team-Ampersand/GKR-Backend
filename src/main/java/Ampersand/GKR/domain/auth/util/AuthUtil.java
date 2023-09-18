@@ -36,6 +36,15 @@ public class AuthUtil {
         saveNewRefreshToken(signInAdminInfo, refreshToken);
     }
 
+    public void saveNewTeacher(GAuthUserInfo gAuthUserInfo, String refreshToken) {
+
+        User signInAdminInfo = authConverter.toTeacherEntity(gAuthUserInfo);
+
+        userRepository.save(signInAdminInfo);
+
+        saveNewRefreshToken(signInAdminInfo, refreshToken);
+    }
+
     public RefreshToken saveNewRefreshToken(User userInfo, String refreshToken) {
 
         RefreshToken newRefreshToken = authConverter.toEntity(userInfo, refreshToken);
