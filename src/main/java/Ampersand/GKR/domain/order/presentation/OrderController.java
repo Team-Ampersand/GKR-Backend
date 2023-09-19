@@ -34,6 +34,8 @@ public class OrderController {
 
     private final ListNotReturnUserEquipmentService listNotReturnUserEquipmentService;
 
+    private final OrderCancelService orderCancelService;
+
 
     @PostMapping("/rental/{id}")
     public ResponseEntity<Void> eqRental(@PathVariable Long id, @RequestBody RentalEquipmentRequest rentalEquipmentRequest) {
@@ -48,8 +50,14 @@ public class OrderController {
     }
 
     @PostMapping("/extension/{id}")
-    public ResponseEntity<Void> eqExtension(@PathVariable Long id, ExtensionEquipmentRequest extensionEquipmentRequest) {
+    public ResponseEntity<Void> eqExtension(@PathVariable Long id, @RequestBody ExtensionEquipmentRequest extensionEquipmentRequest) {
         extensionEquipmentService.execute(id, extensionEquipmentRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<Void> cancel(@PathVariable Long id) {
+        orderCancelService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
