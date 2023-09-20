@@ -2,6 +2,9 @@ package Ampersand.GKR.global.security.config;
 
 import Ampersand.GKR.global.filter.ExceptionFilter;
 import Ampersand.GKR.global.filter.JwtRequestFilter;
+import Ampersand.GKR.global.logger.filter.LogRequestFilter;
+import Ampersand.GKR.global.security.handler.CustomAccessDeniedHandler;
+import Ampersand.GKR.global.security.handler.CustomAuthenticationEntryPointHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +24,8 @@ public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
 
     private final ExceptionFilter exceptionFilter;
+
+    private final LogRequestFilter logRequestFilter;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -68,11 +73,17 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH, "/violation").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
                 .antMatchers(HttpMethod.GET, "/violation").authenticated()
 
-                .anyRequest().denyAll();
+                .anyRequest().denyAll()
 
-        http
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
+                .authenticationEntryPoint(new CustomAuthenticationEntryPointHandler())
+
+                .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(exceptionFilter, JwtRequestFilter.class);
+                .addFilterBefore(exceptionFilter, JwtRequestFilter.class)
+                .addFilterBefore(logRequestFilter, ExceptionFilter.class);
 
         return http.build();
     }
