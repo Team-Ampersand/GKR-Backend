@@ -74,6 +74,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/violation").authenticated()
                 .antMatchers(HttpMethod.GET, "/violation/all").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 
+                .antMatchers(HttpMethod.POST, "/notice").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
+
                 .anyRequest().denyAll()
 
                 .and()
