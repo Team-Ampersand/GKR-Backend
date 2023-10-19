@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.notice.entity;
 
+import Ampersand.GKR.domain.notice.presentation.dto.request.EditNoticeRequest;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,4 +31,10 @@ public class Notice {
 
     @Column(name = "create_notice_date")
     private LocalDateTime createNoticeDate;
+
+    public void edit(EditNoticeRequest editNoticeRequest, String fileUrl) {
+        this.title = editNoticeRequest.getTitle();
+        this.content = editNoticeRequest.getContent();
+        this.imageUrl = fileUrl;
+    }
 }
