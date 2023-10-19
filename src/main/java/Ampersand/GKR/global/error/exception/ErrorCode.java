@@ -37,7 +37,10 @@ public enum ErrorCode {
     //VIOLATION
     CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403),
     NOT_CURRENTLY_VIOLATING("현재 제재를 당한 상태가 아닙니다.", 400),
-    ALREADY_VIOLATING("이미 제재중인 상태입니다.", 409);
+    ALREADY_VIOLATING("이미 제재중인 상태입니다.", 409),
+
+    //NOTICE
+    NOTICE_NOT_FOUND("공지글을 찾을 수 없습니다.", 404);
 
     private final String message;
 
