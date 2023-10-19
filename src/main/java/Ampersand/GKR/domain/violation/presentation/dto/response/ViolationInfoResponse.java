@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ViolationInfoResponse {
 
+    private String userName;
+
     private ViolationReason violationReason;
 
     private LocalDateTime violationStartDate;
@@ -22,6 +24,16 @@ public class ViolationInfoResponse {
     public static ViolationInfoResponse toResponse(Violation violation) {
 
         return ViolationInfoResponse.builder()
+                .violationReason(violation.getViolationReason())
+                .violationStartDate(violation.getViolationStartDate())
+                .violationEndDate(violation.getViolationEndDate())
+                .build();
+    }
+
+    public static ViolationInfoResponse toAllResponse(Violation violation) {
+
+        return ViolationInfoResponse.builder()
+                .userName(violation.getUser().getName())
                 .violationReason(violation.getViolationReason())
                 .violationStartDate(violation.getViolationStartDate())
                 .violationEndDate(violation.getViolationEndDate())
