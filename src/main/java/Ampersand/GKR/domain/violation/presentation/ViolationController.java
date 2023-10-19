@@ -3,6 +3,7 @@ package Ampersand.GKR.domain.violation.presentation;
 import Ampersand.GKR.domain.violation.presentation.dto.request.ViolationCancelRequest;
 import Ampersand.GKR.domain.violation.presentation.dto.request.ViolationRequest;
 import Ampersand.GKR.domain.violation.presentation.dto.response.ListViolationInfoResponse;
+import Ampersand.GKR.domain.violation.service.ListAllViolationService;
 import Ampersand.GKR.domain.violation.service.ListViolationService;
 import Ampersand.GKR.domain.violation.service.ViolationCancelService;
 import Ampersand.GKR.domain.violation.service.ViolationService;
@@ -25,6 +26,8 @@ public class ViolationController {
 
     private final ListViolationService listViolationService;
 
+    private final ListAllViolationService listAllViolationService;
+
     @PostMapping
     public ResponseEntity<Void> violation(@RequestBody ViolationRequest violationRequest) {
         violationService.execute(violationRequest);
@@ -40,6 +43,12 @@ public class ViolationController {
     @GetMapping
     public ResponseEntity<ListViolationInfoResponse> violationInfo() {
         var list = listViolationService.execute();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<ListViolationInfoResponse> violationAllInfo() {
+        var list = listAllViolationService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

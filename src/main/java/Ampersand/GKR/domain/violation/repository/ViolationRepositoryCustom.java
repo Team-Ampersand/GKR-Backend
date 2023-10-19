@@ -7,4 +7,6 @@ import java.util.List;
 public interface ViolationRepositoryCustom {
 
     List<Violation> findAllByMostRecentViolation();
+
+    List<Violation> findAllCurrentViolations();
 }
