@@ -6,6 +6,7 @@ import Ampersand.GKR.domain.notice.presentation.dto.request.EditNoticeRequest;
 import Ampersand.GKR.global.annotation.RollbackService;
 import Ampersand.GKR.global.util.NoticeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 @RollbackService
@@ -16,11 +17,11 @@ public class EditNoticeService {
 
     private final FileUploadService fileUploadService;
 
-    public void execute(Long id, EditNoticeRequest editNoticeRequest, MultipartFile file) {
+    public void execute(Long id, EditNoticeRequest editNoticeRequest, @Nullable MultipartFile file) {
 
         Notice notice = noticeUtil.findNoticeById(id);
 
-        String fileUrl = fileUploadService.execute(file).getImageUrl();
+        String fileUrl = (file != null) ? fileUploadService.execute(file).getImageUrl() : notice.getImageUrl();
 
         notice.edit(editNoticeRequest, fileUrl);
     }

@@ -6,6 +6,7 @@ import Ampersand.GKR.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import Ampersand.GKR.domain.notice.repository.NoticeRepository;
 import Ampersand.GKR.global.annotation.RollbackService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -18,9 +19,9 @@ public class CreateNoticeService {
 
     private final FileUploadService fileUploadService;
 
-    public void execute(CreateNoticeRequest createNoticeRequest, MultipartFile file) {
+    public void execute(CreateNoticeRequest createNoticeRequest, @Nullable MultipartFile file) {
 
-        String fileUrl = fileUploadService.execute(file).getImageUrl();
+        String fileUrl = (file != null) ? fileUploadService.execute(file).getImageUrl() : null;
 
         Notice notice = Notice.builder()
                 .title(createNoticeRequest.getTitle())
