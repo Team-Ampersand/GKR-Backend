@@ -16,8 +16,6 @@ public class NoticeResponse {
 
     private String title;
 
-    private String content;
-
     private String imageUrl;
 
     private LocalDateTime createNoticeDate;
@@ -27,7 +25,6 @@ public class NoticeResponse {
         return NoticeResponse.builder()
                 .id(notice.getId())
                 .title(notice.getTitle())
-                .content(notice.getContent())
                 .imageUrl(notice.getImageUrl())
                 .createNoticeDate(notice.getCreateNoticeDate())
                 .build();
