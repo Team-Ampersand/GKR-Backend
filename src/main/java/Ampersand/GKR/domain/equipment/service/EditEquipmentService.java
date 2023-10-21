@@ -8,6 +8,7 @@ import Ampersand.GKR.global.annotation.RollbackService;
 import Ampersand.GKR.global.util.EquipmentUtil;
 import Ampersand.GKR.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 @RollbackService
@@ -20,13 +21,13 @@ public class EditEquipmentService {
 
     private final FileUploadService fileUploadService;
 
-    public void execute(Long id, EditEquipmentRequest equipmentRequest, MultipartFile file) {
+    public void execute(Long id, EditEquipmentRequest equipmentRequest, @Nullable MultipartFile file) {
 
         User user = userUtil.currentUser();
 
         Equipment equipment = equipmentUtil.findEquipmentById(id);
 
-        String fileUrl = fileUploadService.execute(file).getImageUrl();
+        String fileUrl = (file != null) ? fileUploadService.execute(file).getImageUrl() : equipment.getImageUrl();
 
         equipment.edit(equipmentRequest, fileUrl);
     }

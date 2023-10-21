@@ -9,6 +9,7 @@ import Ampersand.GKR.domain.user.entity.User;
 import Ampersand.GKR.global.annotation.RollbackService;
 import Ampersand.GKR.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 @RollbackService
@@ -21,11 +22,11 @@ public class CreateEquipmentService {
 
     private final FileUploadService fileUploadService;
 
-    public void execute(CreateEquipmentRequest equipmentRequest, MultipartFile file) {
+    public void execute(CreateEquipmentRequest equipmentRequest, @Nullable MultipartFile file) {
 
         User user = userUtil.currentUser();
 
-        String fileUrl = fileUploadService.execute(file).getImageUrl();
+        String fileUrl = (file != null) ? fileUploadService.execute(file).getImageUrl() : null;
 
         Equipment equipment = Equipment.builder()
                 .name(equipmentRequest.getName())
@@ -37,5 +38,4 @@ public class CreateEquipmentService {
 
         equipmentRepository.save(equipment);
     }
-
 }
