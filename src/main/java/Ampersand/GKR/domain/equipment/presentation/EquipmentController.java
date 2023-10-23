@@ -40,7 +40,7 @@ public class EquipmentController {
     private final RepairCompletionEquipmentService repairCompletionEquipmentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
+    public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file", required = false) MultipartFile file) {
         createEquipmentService.execute(createEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -82,7 +82,7 @@ public class EquipmentController {
     }
 
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<Void> edit(@PathVariable Long id, @RequestPart(name = "equipment") EditEquipmentRequest editEquipmentRequest, @RequestPart(name = "file") MultipartFile file) {
+    public ResponseEntity<Void> edit(@PathVariable Long id, @RequestPart(name = "equipment") EditEquipmentRequest editEquipmentRequest, @RequestPart(name = "file", required = false) MultipartFile file) {
         editEquipmentService.execute(id, editEquipmentRequest, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }

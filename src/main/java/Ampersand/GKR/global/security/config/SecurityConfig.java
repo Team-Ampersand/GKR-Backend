@@ -74,6 +74,11 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/violation").authenticated()
                 .antMatchers(HttpMethod.GET, "/violation/all").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 
+                .antMatchers(HttpMethod.POST, "/notice").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
+                .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
+                .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
+                .antMatchers(HttpMethod.GET, "/notice").authenticated()
+
                 .anyRequest().denyAll()
 
                 .and()
