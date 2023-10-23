@@ -2,11 +2,9 @@ package Ampersand.GKR.domain.notice.presentation;
 
 import Ampersand.GKR.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import Ampersand.GKR.domain.notice.presentation.dto.request.EditNoticeRequest;
+import Ampersand.GKR.domain.notice.presentation.dto.response.DetailNoticeResponse;
 import Ampersand.GKR.domain.notice.presentation.dto.response.ListNoticeResponse;
-import Ampersand.GKR.domain.notice.service.CreateNoticeService;
-import Ampersand.GKR.domain.notice.service.DeleteNoticeService;
-import Ampersand.GKR.domain.notice.service.EditNoticeService;
-import Ampersand.GKR.domain.notice.service.ListNoticeService;
+import Ampersand.GKR.domain.notice.service.*;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,13 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class NoticeController {
 
+    private final EditNoticeService editNoticeService;
+
+    private final ListNoticeService listNoticeService;
+
     private final CreateNoticeService createNoticeService;
 
     private final DeleteNoticeService deleteNoticeService;
 
-    private final EditNoticeService editNoticeService;
+    private final DetailNoticeService detailNoticeService;
 
-    private final ListNoticeService listNoticeService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestPart(name = "notice") CreateNoticeRequest createNoticeRequest, @RequestPart(name = "file", required = false) MultipartFile file) {
@@ -38,6 +39,12 @@ public class NoticeController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DetailNoticeResponse> detail(@PathVariable Long id) {
+        DetailNoticeResponse detailNoticeResponse = detailNoticeService.execute(id);
+        return new ResponseEntity<>(detailNoticeResponse, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteNoticeService.execute(id);
@@ -49,6 +56,4 @@ public class NoticeController {
         editNoticeService.execute(id, editNoticeRequest, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
 }
