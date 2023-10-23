@@ -25,6 +25,12 @@ public class ApplicationResponse {
 
     private String userName;
 
+    private int grade;
+
+    private int classNum;
+
+    private int stuNum;
+
     private String reason;
 
     private LocalDateTime rentalStartDate;
@@ -40,6 +46,9 @@ public class ApplicationResponse {
                 .description(application.getEquipment().getDescription())
                 .orderType(application.getOrderType())
                 .userName(application.getUserName())
+                .grade(application.getUser().getGrade())
+                .classNum(application.getUser().getClassNum())
+                .stuNum(application.getUser().getStuNum())
                 .reason(application.getReason())
                 .rentalStartDate(application.getRentalStartDate())
                 .rentalEndDate(application.getRentalEndDate())
