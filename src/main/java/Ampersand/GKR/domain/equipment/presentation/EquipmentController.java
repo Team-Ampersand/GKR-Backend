@@ -3,6 +3,7 @@ package Ampersand.GKR.domain.equipment.presentation;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
+import Ampersand.GKR.domain.equipment.presentation.dto.request.DeleteMultipleEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.SearchEquipmentNameRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
@@ -38,6 +39,8 @@ public class EquipmentController {
     private final RepairEquipmentService repairEquipmentService;
 
     private final RepairCompletionEquipmentService repairCompletionEquipmentService;
+
+    private final DeleteMultipleEquipmentService deleteMultipleEquipmentService;
 
     @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestPart(name = "equipment") CreateEquipmentRequest createEquipmentRequest, @RequestPart(name = "file", required = false) MultipartFile file) {
@@ -78,6 +81,12 @@ public class EquipmentController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteEquipmentService.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteMultiple(@RequestBody DeleteMultipleEquipmentRequest deleteMultipleEquipmentRequest) {
+        deleteMultipleEquipmentService.execute(deleteMultipleEquipmentRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
