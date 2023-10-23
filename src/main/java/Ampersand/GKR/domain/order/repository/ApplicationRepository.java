@@ -1,5 +1,6 @@
 package Ampersand.GKR.domain.order.repository;
 
+import Ampersand.GKR.domain.equipment.entity.Equipment;
 import Ampersand.GKR.domain.order.entity.Application;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.user.entity.User;
@@ -15,4 +16,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     List<Application> findByOrderStatus(OrderStatus orderStatus);
 
     List<Application> findByRentalEndDateBefore(LocalDateTime currentDate);
+
+    void deleteAllByEquipment(Equipment equipment);
 }
