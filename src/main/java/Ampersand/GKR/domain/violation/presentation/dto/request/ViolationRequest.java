@@ -1,6 +1,5 @@
 package Ampersand.GKR.domain.violation.presentation.dto.request;
 
-import Ampersand.GKR.domain.violation.enums.ViolationReason;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,5 +12,5 @@ public class ViolationRequest {
 
     private String email;
 
-    private ViolationReason violationReason;
+    private String violationReason;
 }
