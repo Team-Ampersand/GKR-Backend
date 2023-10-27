@@ -1,7 +1,6 @@
 package Ampersand.GKR.domain.violation.presentation.dto.response;
 
 import Ampersand.GKR.domain.violation.entity.Violation;
-import Ampersand.GKR.domain.violation.enums.ViolationReason;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +14,7 @@ public class ViolationInfoResponse {
 
     private String userName;
 
-    private ViolationReason violationReason;
+    private String violationReason;
 
     private LocalDateTime violationStartDate;
 
