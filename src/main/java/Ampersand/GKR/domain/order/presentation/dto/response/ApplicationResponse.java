@@ -25,6 +25,8 @@ public class ApplicationResponse {
 
     private String userName;
 
+    private String email;
+
     private int grade;
 
     private int classNum;
@@ -46,6 +48,7 @@ public class ApplicationResponse {
                 .description(application.getEquipment().getDescription())
                 .orderType(application.getOrderType())
                 .userName(application.getUserName())
+                .email(application.getUser().getEmail())
                 .grade(application.getUser().getGrade())
                 .classNum(application.getUser().getClassNum())
                 .stuNum(application.getUser().getStuNum())
