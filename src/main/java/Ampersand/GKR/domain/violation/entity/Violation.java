@@ -1,7 +1,6 @@
 package Ampersand.GKR.domain.violation.entity;
 
 import Ampersand.GKR.domain.user.entity.User;
-import Ampersand.GKR.domain.violation.enums.ViolationReason;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +22,7 @@ public class Violation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    private ViolationReason violationReason;
+    private String violationReason;
 
     @Column(name = "violation_start_date")
     private LocalDateTime violationStartDate;
