@@ -2,7 +2,7 @@ package Ampersand.GKR.domain.notice.presentation;
 
 import Ampersand.GKR.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import Ampersand.GKR.domain.notice.presentation.dto.request.EditNoticeRequest;
-import Ampersand.GKR.domain.notice.presentation.dto.response.DetailNoticeResponse;
+import Ampersand.GKR.domain.notice.presentation.dto.response.NoticeResponse;
 import Ampersand.GKR.domain.notice.presentation.dto.response.ListNoticeResponse;
 import Ampersand.GKR.domain.notice.service.*;
 import Ampersand.GKR.global.annotation.RestRequestService;
@@ -40,9 +40,9 @@ public class NoticeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetailNoticeResponse> detail(@PathVariable Long id) {
-        DetailNoticeResponse detailNoticeResponse = detailNoticeService.execute(id);
-        return new ResponseEntity<>(detailNoticeResponse, HttpStatus.OK);
+    public ResponseEntity<NoticeResponse> detail(@PathVariable Long id) {
+        NoticeResponse noticeResponse = detailNoticeService.execute(id);
+        return new ResponseEntity<>(noticeResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
