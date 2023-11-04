@@ -3,6 +3,7 @@ package Ampersand.GKR.domain.order.presentation;
 import Ampersand.GKR.domain.order.enums.OrderStatus;
 import Ampersand.GKR.domain.order.presentation.dto.request.ExtensionEquipmentRequest;
 import Ampersand.GKR.domain.order.presentation.dto.request.RentalEquipmentRequest;
+import Ampersand.GKR.domain.order.presentation.dto.response.ApplicationResponse;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListApplicationResponse;
 import Ampersand.GKR.domain.order.presentation.dto.response.ListOrderEquipmentResponse;
 import Ampersand.GKR.domain.order.service.*;
@@ -35,6 +36,8 @@ public class OrderController {
     private final ListNotReturnUserEquipmentService listNotReturnUserEquipmentService;
 
     private final OrderCancelService orderCancelService;
+
+    private final DetailOrderService detailOrderService;
 
 
     @PostMapping("/rental/{id}")
@@ -95,5 +98,11 @@ public class OrderController {
     public ResponseEntity<ListApplicationResponse> noReturnList() {
         var list = listNotReturnUserEquipmentService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<ApplicationResponse> detail(@PathVariable Long id) {
+        ApplicationResponse applicationResponse = detailOrderService.execute(id);
+        return new ResponseEntity<>(applicationResponse, HttpStatus.OK);
     }
 }
