@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH, "/equipment/repair/completion/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 
                 .antMatchers(HttpMethod.GET, "/user").authenticated()
+                .antMatchers(HttpMethod.GET, "/user/rental").authenticated()
                 .antMatchers(HttpMethod.GET, "/user/all").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 
                 .antMatchers(HttpMethod.POST, "/order/rental/{id}").authenticated()

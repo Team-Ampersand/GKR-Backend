@@ -17,5 +17,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     List<Application> findByRentalEndDateBefore(LocalDateTime currentDate);
 
+    List<Application> findAllByUserAndOrderStatus(User user, OrderStatus orderStatus);
+
     void deleteAllByEquipment(Equipment equipment);
 }

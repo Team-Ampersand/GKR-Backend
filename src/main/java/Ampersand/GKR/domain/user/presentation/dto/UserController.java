@@ -1,8 +1,10 @@
 package Ampersand.GKR.domain.user.presentation.dto;
 
 import Ampersand.GKR.domain.user.presentation.dto.response.ListAllUserInfoResponse;
+import Ampersand.GKR.domain.user.presentation.dto.response.ListMyRentalEquipmentResponse;
 import Ampersand.GKR.domain.user.presentation.dto.response.UserInfoResponse;
 import Ampersand.GKR.domain.user.service.ListAllUserInfoService;
+import Ampersand.GKR.domain.user.service.ListMyRentalEquipmentService;
 import Ampersand.GKR.domain.user.service.UserInfoService;
 import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ public class UserController {
 
     private final ListAllUserInfoService listAllUserInfoService;
 
+    private final ListMyRentalEquipmentService listMyRentalEquipmentService;
+
     @GetMapping
     public ResponseEntity<UserInfoResponse> getUserInfo() {
         UserInfoResponse userInfoResponse = userInfoService.execute();
@@ -28,5 +32,11 @@ public class UserController {
     public ResponseEntity<ListAllUserInfoResponse> getAllUserInfo() {
         ListAllUserInfoResponse listAllUserInfoResponse = listAllUserInfoService.execute();
         return new ResponseEntity<>(listAllUserInfoResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/rental")
+    public ResponseEntity<ListMyRentalEquipmentResponse> getMyRental() {
+        ListMyRentalEquipmentResponse listMyRentalEquipmentResponse = listMyRentalEquipmentService.execute();
+        return new ResponseEntity<>(listMyRentalEquipmentResponse, HttpStatus.OK);
     }
 }
