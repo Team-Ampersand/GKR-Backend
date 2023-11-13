@@ -1,10 +1,9 @@
 package Ampersand.GKR.domain.violation.service;
 
-import Ampersand.GKR.domain.user.entity.User;
-import Ampersand.GKR.domain.user.exception.UserNotFoundException;
-import Ampersand.GKR.domain.user.repository.UserRepository;
+import Ampersand.GKR.domain.violation.entity.Violation;
 import Ampersand.GKR.domain.violation.exception.NotCurrentlyViolatingException;
-import Ampersand.GKR.domain.violation.presentation.dto.request.ViolationCancelRequest;
+import Ampersand.GKR.domain.violation.exception.ViolationNotFoundException;
+import Ampersand.GKR.domain.violation.repository.ViolationRepository;
 import Ampersand.GKR.global.annotation.RollbackService;
 import lombok.RequiredArgsConstructor;
 
@@ -12,17 +11,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ViolationCancelService {
 
-    private final UserRepository userRepository;
+    private final ViolationRepository violationRepository;
 
-    public void execute(ViolationCancelRequest violationCancelRequest) {
+    public void execute(Long id) {
 
-        User user = userRepository.findByEmail(violationCancelRequest.getEmail())
-                .orElseThrow(() -> new UserNotFoundException());
+        Violation violation = violationRepository.findById(id)
+                .orElseThrow(() -> new ViolationNotFoundException());
 
-        if (user.isRentalRestricted() == false) {
+        if (violation.getUser().isRentalRestricted() == false && violation.isCanceled() == false) {
             throw new NotCurrentlyViolatingException();
         }
 
-        user.setRentalRestricted(false);
+        violation.setCanceled(false);
+
+        violation.getUser().setRentalRestricted(false);
     }
 }

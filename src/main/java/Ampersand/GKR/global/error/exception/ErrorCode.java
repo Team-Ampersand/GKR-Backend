@@ -35,8 +35,9 @@ public enum ErrorCode {
     REQUEST_IS_EXISTS("대기중인 요청이나 현재 기자재의 사용자가 존재합니다.", 409),
 
     //VIOLATION
-    CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403),
     NOT_CURRENTLY_VIOLATING("현재 제재를 당한 상태가 아닙니다.", 400),
+    CURRENTLY_VIOLATING("현재 제재를 당한 상태입니다.", 403),
+    VIOLATION_NOT_FOUND("제재 사항을 찾을 수 없습니다.", 404),
     ALREADY_VIOLATING("이미 제재중인 상태입니다.", 409),
 
     //NOTICE
