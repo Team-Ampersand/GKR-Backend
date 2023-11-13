@@ -23,18 +23,18 @@ public class DeleteMultipleEquipmentService {
 
     private final EquipmentUtil equipmentUtil;
 
-    public void execute(DeleteMultipleEquipmentRequest deleteMultipleEquipmentRequest) {
+    public void execute(List<Long> deleteMultipleEquipmentRequest) {
 
-        List<Long> equipmentIdList = deleteMultipleEquipmentRequest.getEquipmentIdList();
-
-        for (Long equipmentId : equipmentIdList) {
+        for (Long equipmentId : deleteMultipleEquipmentRequest) {
 
             Equipment equipment = equipmentUtil.findEquipmentById(equipmentId);
 
             if (equipment.getImageUrl() != null) {
                 fileUploadService.deleteFile(equipment.getImageUrl());
             }
+
             applicationRepository.deleteAllByEquipment(equipment);
+
             equipmentRepository.delete(equipment);
         }
     }
