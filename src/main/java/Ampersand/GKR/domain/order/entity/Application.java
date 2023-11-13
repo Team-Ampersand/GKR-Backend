@@ -50,24 +50,34 @@ public class Application {
     private User user;
 
     public void setOrderInfo(OrderStatus orderStatus, OrderType orderType) {
-        this.orderStatus = orderStatus;
-        this.orderType = orderType;
+        synchronized(this) {
+            this.orderStatus = orderStatus;
+            this.orderType = orderType;
+        }
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+        synchronized(this) {
+            this.orderStatus = orderStatus;
+        }
     }
 
     public void setRentalDates() {
-        this.rentalStartDate = LocalDateTime.now();
-        this.rentalEndDate = rentalStartDate.plusMonths(1);
+        synchronized(this) {
+            this.rentalStartDate = LocalDateTime.now();
+            this.rentalEndDate = rentalStartDate.plusMonths(1);
+        }
     }
 
     public void extensionDate() {
-        this.rentalEndDate = rentalEndDate.plusMonths(1);
+        synchronized(this) {
+            this.rentalEndDate = rentalEndDate.plusMonths(1);
+        }
     }
 
     public void extensionReason(String reason) {
-        this.reason = reason;
+        synchronized(this) {
+            this.reason = reason;
+        }
     }
 }
