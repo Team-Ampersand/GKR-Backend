@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ViolationInfoResponse {
 
+    private Long id;
+
     private String userName;
 
     private String violationReason;
@@ -20,22 +22,28 @@ public class ViolationInfoResponse {
 
     private LocalDateTime violationEndDate;
 
+    private boolean canceled;
+
     public static ViolationInfoResponse toResponse(Violation violation) {
 
         return ViolationInfoResponse.builder()
+                .id(violation.getId())
                 .violationReason(violation.getViolationReason())
                 .violationStartDate(violation.getViolationStartDate())
                 .violationEndDate(violation.getViolationEndDate())
+                .canceled(violation.isCanceled())
                 .build();
     }
 
     public static ViolationInfoResponse toAllResponse(Violation violation) {
 
         return ViolationInfoResponse.builder()
+                .id(violation.getId())
                 .userName(violation.getUser().getName())
                 .violationReason(violation.getViolationReason())
                 .violationStartDate(violation.getViolationStartDate())
                 .violationEndDate(violation.getViolationEndDate())
+                .canceled(violation.isCanceled())
                 .build();
     }
 }

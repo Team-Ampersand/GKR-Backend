@@ -44,6 +44,8 @@ public class Equipment {
     }
 
     public void setEquipmentStatus(EquipmentStatus equipmentStatus) {
-        this.equipmentStatus = equipmentStatus;
+        synchronized(this) {
+            this.equipmentStatus = equipmentStatus;
+        }
     }
 }

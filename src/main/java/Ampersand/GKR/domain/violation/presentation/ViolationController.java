@@ -1,6 +1,5 @@
 package Ampersand.GKR.domain.violation.presentation;
 
-import Ampersand.GKR.domain.violation.presentation.dto.request.ViolationCancelRequest;
 import Ampersand.GKR.domain.violation.presentation.dto.request.ViolationRequest;
 import Ampersand.GKR.domain.violation.presentation.dto.response.ListViolationInfoResponse;
 import Ampersand.GKR.domain.violation.service.ListAllViolationService;
@@ -11,10 +10,7 @@ import Ampersand.GKR.global.annotation.RestRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestRequestService("/violation")
@@ -34,9 +30,9 @@ public class ViolationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping
-    public ResponseEntity<Void> violationCancel(@RequestBody ViolationCancelRequest violationCancelRequest) {
-        violationCancelService.execute(violationCancelRequest);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> violationCancel(@PathVariable Long id) {
+        violationCancelService.execute(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

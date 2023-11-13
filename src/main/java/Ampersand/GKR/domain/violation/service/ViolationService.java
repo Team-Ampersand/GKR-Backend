@@ -30,6 +30,7 @@ public class ViolationService {
         Violation violation = Violation.builder()
                 .violationReason(violationRequest.getViolationReason())
                 .user(user)
+                .canceled(true)
                 .build();
 
         violationRepository.save(violation);

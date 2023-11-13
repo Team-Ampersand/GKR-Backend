@@ -73,7 +73,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/order/detail/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 
                 .antMatchers(HttpMethod.POST, "/violation").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
-                .antMatchers(HttpMethod.PATCH, "/violation").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
+                .antMatchers(HttpMethod.PATCH, "/violation/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
                 .antMatchers(HttpMethod.GET, "/violation").authenticated()
                 .antMatchers(HttpMethod.GET, "/violation/all").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
 

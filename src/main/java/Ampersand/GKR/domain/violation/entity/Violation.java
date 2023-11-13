@@ -30,8 +30,18 @@ public class Violation {
     @Column(name = "violation_end_date")
     private LocalDateTime violationEndDate;
 
+    private boolean canceled;
+
     public void setViolationDates() {
-        this.violationStartDate = LocalDateTime.now();
-        this.violationEndDate = violationStartDate.plusMonths(1);
+        synchronized(this) {
+            this.violationStartDate = LocalDateTime.now();
+            this.violationEndDate = violationStartDate.plusMonths(1);
+        }
+    }
+
+    public void setCanceled(boolean canceled) {
+        synchronized(this) {
+            this.canceled = canceled;
+        }
     }
 }
