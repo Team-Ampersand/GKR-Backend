@@ -33,7 +33,7 @@ public class ViolationRepositoryCustomImpl implements ViolationRepositoryCustom 
                 .from(QViolation.violation)
                 .where(QViolation.violation.user.isRentalRestricted.isTrue())
                 .where(QViolation.violation.violationEndDate.goe(LocalDateTime.now()))
-                .where(QViolation.violation.Canceled.isTrue())
+                .where(QViolation.violation.canceled.isTrue())
                 .fetch();
     }
 
