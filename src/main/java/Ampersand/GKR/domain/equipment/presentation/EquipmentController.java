@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestRequestService("/equipment")
 public class EquipmentController {
@@ -85,7 +87,7 @@ public class EquipmentController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteMultiple(@RequestBody DeleteMultipleEquipmentRequest deleteMultipleEquipmentRequest) {
+    public ResponseEntity<Void> deleteMultiple(@RequestParam("equipmentIdList") List<Long> deleteMultipleEquipmentRequest) {
         deleteMultipleEquipmentService.execute(deleteMultipleEquipmentRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
