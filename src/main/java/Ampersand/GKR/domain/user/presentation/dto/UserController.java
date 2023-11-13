@@ -1,7 +1,7 @@
 package Ampersand.GKR.domain.user.presentation.dto;
 
+import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentResponse;
 import Ampersand.GKR.domain.user.presentation.dto.response.ListAllUserInfoResponse;
-import Ampersand.GKR.domain.user.presentation.dto.response.ListMyRentalEquipmentResponse;
 import Ampersand.GKR.domain.user.presentation.dto.response.UserInfoResponse;
 import Ampersand.GKR.domain.user.service.ListAllUserInfoService;
 import Ampersand.GKR.domain.user.service.ListMyRentalEquipmentService;
@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("/rental")
-    public ResponseEntity<ListMyRentalEquipmentResponse> getMyRental() {
-        ListMyRentalEquipmentResponse listMyRentalEquipmentResponse = listMyRentalEquipmentService.execute();
-        return new ResponseEntity<>(listMyRentalEquipmentResponse, HttpStatus.OK);
+    public ResponseEntity<ListEquipmentResponse> getMyRental() {
+        ListEquipmentResponse listEquipmentResponse = listMyRentalEquipmentService.execute();
+        return new ResponseEntity<>(listEquipmentResponse, HttpStatus.OK);
     }
 }
