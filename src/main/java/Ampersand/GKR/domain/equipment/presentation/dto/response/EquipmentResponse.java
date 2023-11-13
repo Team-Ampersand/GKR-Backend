@@ -3,6 +3,7 @@ package Ampersand.GKR.domain.equipment.presentation.dto.response;
 import Ampersand.GKR.domain.equipment.entity.Equipment;
 import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
+import Ampersand.GKR.domain.order.entity.Application;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +34,18 @@ public class EquipmentResponse {
                 .description(equipment.getDescription())
                 .equipmentStatus(equipment.getEquipmentStatus())
                 .equipmentType(equipment.getEquipmentType())
+                .build();
+    }
+
+    public static EquipmentResponse toResponse(Application application) {
+
+        return EquipmentResponse.builder()
+                .id(application.getEquipment().getId())
+                .name(application.getEquipment().getName())
+                .imageUrl(application.getEquipment().getImageUrl())
+                .description(application.getEquipment().getDescription())
+                .equipmentStatus(application.getEquipment().getEquipmentStatus())
+                .equipmentType(application.getEquipment().getEquipmentType())
                 .build();
     }
 }
