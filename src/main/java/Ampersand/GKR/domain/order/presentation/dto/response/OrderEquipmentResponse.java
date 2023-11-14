@@ -12,7 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class OrderEquipmentResponse {
 
-    private Long id;
+    private Long equipmentId;
+
+    private Long applicationId;
 
     private String name;
 
@@ -27,7 +29,8 @@ public class OrderEquipmentResponse {
     public static OrderEquipmentResponse toResponse(Application application) {
 
         return OrderEquipmentResponse.builder()
-                .id(application.getEquipment().getId())
+                .equipmentId(application.getEquipment().getId())
+                .applicationId(application.getId())
                 .name(application.getEquipment().getName())
                 .imageUrl(application.getEquipment().getImageUrl())
                 .description(application.getEquipment().getDescription())
