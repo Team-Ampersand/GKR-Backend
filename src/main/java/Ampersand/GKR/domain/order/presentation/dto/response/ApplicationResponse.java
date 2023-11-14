@@ -42,7 +42,7 @@ public class ApplicationResponse {
     public static ApplicationResponse toResponse(Application application) {
 
         return ApplicationResponse.builder()
-                .id(application.getEquipment().getId())
+                .id(application.getId())
                 .name(application.getEquipment().getName())
                 .imageUrl(application.getEquipment().getImageUrl())
                 .description(application.getEquipment().getDescription())
