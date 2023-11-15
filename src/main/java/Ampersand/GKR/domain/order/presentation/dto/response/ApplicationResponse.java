@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ApplicationResponse {
 
-    private Long id;
+    private Long applicationId;
+
+    private Long equipmentId;
 
     private String name;
 
@@ -42,7 +44,8 @@ public class ApplicationResponse {
     public static ApplicationResponse toResponse(Application application) {
 
         return ApplicationResponse.builder()
-                .id(application.getId())
+                .applicationId(application.getId())
+                .equipmentId(application.getEquipment().getId())
                 .name(application.getEquipment().getName())
                 .imageUrl(application.getEquipment().getImageUrl())
                 .description(application.getEquipment().getDescription())
