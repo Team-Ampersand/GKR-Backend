@@ -13,7 +13,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class EquipmentResponse {
 
-    private Long id;
+    private Long applicationId;
+
+    private Long equipmentId;
 
     private String name;
 
@@ -28,7 +30,7 @@ public class EquipmentResponse {
     public static EquipmentResponse toResponse(Equipment equipment) {
 
         return EquipmentResponse.builder()
-                .id(equipment.getId())
+                .equipmentId(equipment.getId())
                 .name(equipment.getName())
                 .imageUrl(equipment.getImageUrl())
                 .description(equipment.getDescription())
@@ -40,7 +42,8 @@ public class EquipmentResponse {
     public static EquipmentResponse toResponse(Application application) {
 
         return EquipmentResponse.builder()
-                .id(application.getEquipment().getId())
+                .applicationId(application.getId())
+                .equipmentId(application.getEquipment().getId())
                 .name(application.getEquipment().getName())
                 .imageUrl(application.getEquipment().getImageUrl())
                 .description(application.getEquipment().getDescription())
