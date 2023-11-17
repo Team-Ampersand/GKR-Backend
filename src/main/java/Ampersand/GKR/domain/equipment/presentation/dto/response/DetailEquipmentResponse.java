@@ -11,7 +11,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class DetailEquipmentResponse {
 
-    private Long id;
+    private Long equipmentId;
+
+    private Long applicationId;
 
     private String name;
 
