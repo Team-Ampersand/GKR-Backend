@@ -20,4 +20,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     List<Application> findAllByUserAndOrderStatus(User user, OrderStatus orderStatus);
 
     void deleteAllByEquipment(Equipment equipment);
+
+    Application findByEquipment(Equipment equipment);
 }
