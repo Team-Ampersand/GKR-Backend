@@ -21,5 +21,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     void deleteAllByEquipment(Equipment equipment);
 
-    Application findByEquipment(Equipment equipment);
+    Application findByEquipmentAndOrderStatusIn(Equipment equipment, List<OrderStatus> orderStatusList);
 }
