@@ -3,7 +3,6 @@ package Ampersand.GKR.domain.equipment.presentation;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.CreateEquipmentRequest;
-import Ampersand.GKR.domain.equipment.presentation.dto.request.DeleteMultipleEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.EditEquipmentRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.request.SearchEquipmentNameRequest;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.DetailEquipmentResponse;
@@ -26,9 +25,11 @@ public class EquipmentController {
 
     private final ListEquipmentService listEquipmentService;
 
-    private final ListEqStatusEquipmentService listEqStatusEquipmentService;
+    private final ListStatusEquipmentService listStatusEquipmentService;
 
-    private final ListEqTypeEquipmentService listEqTypeEquipmentService;
+    private final ListTypeEquipmentService listTypeEquipmentService;
+
+    private final ListFilterEquipmentService listFilterEquipmentService;
 
     private final DeleteEquipmentService deleteEquipmentService;
 
@@ -64,13 +65,22 @@ public class EquipmentController {
 
     @GetMapping("/state")
     public ResponseEntity<ListEquipmentResponse> eqStatusList(@RequestParam EquipmentStatus equipmentStatus) {
-        var list = listEqStatusEquipmentService.execute(equipmentStatus);
+        var list = listStatusEquipmentService.execute(equipmentStatus);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/type")
     public ResponseEntity<ListEquipmentResponse> eqTypeList(@RequestParam EquipmentType equipmentType) {
-        var list = listEqTypeEquipmentService.execute(equipmentType);
+        var list = listTypeEquipmentService.execute(equipmentType);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<ListEquipmentResponse> filter(
+            @RequestParam(name = "state", required = false) EquipmentStatus equipmentStatus,
+            @RequestParam(name = "type", required = false) EquipmentType equipmentType)
+    {
+        var list = listFilterEquipmentService.execute(equipmentStatus, equipmentType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
