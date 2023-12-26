@@ -1,6 +1,7 @@
 package Ampersand.GKR.domain.equipment.service;
 
 import Ampersand.GKR.domain.equipment.entity.Equipment;
+import Ampersand.GKR.domain.equipment.enums.EquipmentStatus;
 import Ampersand.GKR.domain.equipment.enums.EquipmentType;
 import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentResponse;
 import Ampersand.GKR.domain.equipment.repository.EquipmentRepository;
@@ -14,13 +15,13 @@ import static Ampersand.GKR.domain.equipment.presentation.dto.response.Equipment
 
 @ReadOnlyService
 @RequiredArgsConstructor
-public class ListEqTypeEquipmentService {
+public class ListFilterEquipmentService {
 
     private final EquipmentRepository equipmentRepository;
 
-    public ListEquipmentResponse execute(EquipmentType equipmentType) {
+    public ListEquipmentResponse execute(EquipmentStatus equipmentStatus, EquipmentType equipmentType) {
 
-        List<Equipment> equipments = equipmentRepository.findByEquipmentType(equipmentType);
+        List<Equipment> equipments = equipmentRepository.filter(equipmentStatus, equipmentType);
 
         ListEquipmentResponse listEquipmentResponse = ListEquipmentResponse.builder()
                 .equipmentList(
