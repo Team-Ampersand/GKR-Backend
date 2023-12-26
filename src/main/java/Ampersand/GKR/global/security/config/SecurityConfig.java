@@ -81,8 +81,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/notice/create").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
                 .antMatchers(HttpMethod.DELETE, "/notice/delete/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
                 .antMatchers(HttpMethod.PATCH, "/notice/edit/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_TEACHER")
-                .antMatchers(HttpMethod.GET, "/notice").authenticated()
-                .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
+                .antMatchers(HttpMethod.GET, "/notice").permitAll()
+                .antMatchers(HttpMethod.GET, "/notice/{id}").permitAll()
 
                 .anyRequest().denyAll()
 
