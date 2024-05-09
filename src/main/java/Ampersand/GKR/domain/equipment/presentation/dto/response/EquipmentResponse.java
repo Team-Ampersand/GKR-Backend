@@ -7,10 +7,12 @@ import Ampersand.GKR.domain.order.entity.Application;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class EquipmentResponse {
 
     private Long applicationId;
