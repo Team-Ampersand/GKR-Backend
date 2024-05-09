@@ -1,4 +1,4 @@
-package Ampersand.GKR.global.config.querydsl;
+package Ampersand.GKR.global.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

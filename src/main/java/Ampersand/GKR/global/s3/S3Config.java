@@ -1,4 +1,4 @@
-package Ampersand.GKR.global.config.s3;
+package Ampersand.GKR.global.s3;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
