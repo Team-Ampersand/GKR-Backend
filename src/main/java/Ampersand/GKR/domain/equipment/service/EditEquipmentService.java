@@ -8,6 +8,7 @@ import Ampersand.GKR.global.annotation.RollbackService;
 import Ampersand.GKR.global.util.EquipmentUtil;
 import Ampersand.GKR.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ public class EditEquipmentService {
 
     private final FileUploadService fileUploadService;
 
+    @CacheEvict(cacheNames = "equipmentList", key = "'equipmentList'", cacheManager = "redisCacheManager")
     public void execute(Long id, EditEquipmentRequest equipmentRequest, @Nullable MultipartFile file) {
 
         User user = userUtil.currentUser();
