@@ -5,6 +5,7 @@ import Ampersand.GKR.domain.equipment.presentation.dto.response.ListEquipmentRes
 import Ampersand.GKR.domain.equipment.repository.EquipmentRepository;
 import Ampersand.GKR.global.annotation.ReadOnlyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ public class ListEquipmentService {
 
     private final EquipmentRepository equipmentRepository;
 
+    @Cacheable(cacheNames = "equipmentList", key = "'equipmentList'", cacheManager = "redisCacheManager")
     public ListEquipmentResponse execute() {
 
         List<Equipment> equipments = equipmentRepository.findAll();
